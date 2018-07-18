@@ -10,6 +10,7 @@ USHealthComponent::USHealthComponent()
 {
 	DefaultHealth = 100;
 	bIsDead = false;
+	bUsingTeam = false;
 	TeamNum = 255;
 	SetIsReplicated(true);
 }
@@ -38,12 +39,9 @@ void USHealthComponent::HandleTakeAnyDamage(AActor* DamagedActor, float Damage, 
 {
 	if (Damage <= 0.0f || bIsDead) return;
 
-	/*if (DamageCauser!=DamagedActor && IsFriendly(DamagedActor, DamageCauser))
-	{
+	if (bUsingTeam && DamageCauser!=DamagedActor && IsFriendly(DamagedActor, DamageCauser))
 		return;
-		
-	}
-	*/
+	
 
 	Health = FMath::Clamp(Health - Damage, 0.0f, DefaultHealth);
 
@@ -56,7 +54,6 @@ void USHealthComponent::HandleTakeAnyDamage(AActor* DamagedActor, float Damage, 
 		ASGameMode* GM = Cast<ASGameMode>(GetWorld()->GetAuthGameMode());
 		if (GM)
 		{
-			//GM->OnActorKilled.Broadcast(GetOwner(), DamageCauser);
 			GM->OnActorKilled.Broadcast(GetOwner(), DamageCauser, InstigatedBy);
 		}
 	}
