@@ -23,7 +23,7 @@ void USHealthComponent::BeginPlay()
 	if (GetOwnerRole() == ROLE_Authority)
 	{
 		AActor* MyOwner = GetOwner();
-
+				
 		if (MyOwner)
 		{
 			MyOwner->OnTakeAnyDamage.AddDynamic(this, &USHealthComponent::HandleTakeAnyDamage);
@@ -38,11 +38,12 @@ void USHealthComponent::HandleTakeAnyDamage(AActor* DamagedActor, float Damage, 
 {
 	if (Damage <= 0.0f || bIsDead) return;
 
-	if (DamageCauser!=DamagedActor && IsFriendly(DamagedActor, DamageCauser))
+	/*if (DamageCauser!=DamagedActor && IsFriendly(DamagedActor, DamageCauser))
 	{
 		return;
+		
 	}
-
+	*/
 
 	Health = FMath::Clamp(Health - Damage, 0.0f, DefaultHealth);
 

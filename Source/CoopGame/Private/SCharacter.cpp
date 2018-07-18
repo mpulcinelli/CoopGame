@@ -110,15 +110,27 @@ void ASCharacter::StopFire()
 void ASCharacter::OnHealthChanged(USHealthComponent* OwningHealthComp, float Health, float HealthDelta, const class UDamageType* DamageType,
 	class AController* InstigatedBy, AActor* DamageCauser)
 {
+		
 	if (Health <= 0.0f && !bDied)
 	{
 		bDied = true;
 		GetMovementComponent()->StopMovementImmediately();
 		GetCapsuleComponent()->SetCollisionEnabled(ECollisionEnabled::NoCollision);
+		//GetCapsuleComponent()->GetComponentLocation();
+		// Add Spawn reward here
 		DetachFromControllerPendingDestroy();
 		SetLifeSpan(10.0f);
 	}
 }
+
+void ASCharacter::SpawnReward(FVector Location)
+{
+	
+	//AActor* SpwanedObject = (AActor*)GetWorld()->SpawnActor(ASPowerupActor::Powerup_Reward_Coin(), SpwanedObject, Location);
+
+
+}
+
 
 // Called every frame
 void ASCharacter::Tick(float DeltaTime)

@@ -83,6 +83,13 @@ protected:
 	UPROPERTY(Replicated, BlueprintReadOnly, Category = "Player")
 	bool bIsFiring;
 
+	UPROPERTY(EditAnywhere, Category = "Spawned Reward")
+	TSubclassOf<class ASPowerupActor> SpwanedObject;
+
+private:
+
+	void SpawnReward(FVector Location);
+	
 
 public:	
 	// Called every frame
