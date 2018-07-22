@@ -65,9 +65,16 @@ protected:
 	UPROPERTY(Replicated)
 	ASWeapon* CurrentWeapon;
 
+	UPROPERTY(Replicated)
+	AActor* RewardCoin;
+
+
 	UPROPERTY(EditDefaultsOnly, Category = "Player")
 	TSubclassOf<ASWeapon> StarterWeaponClass;
 	
+	UPROPERTY(EditDefaultsOnly, Category = "Player")
+	TSubclassOf<class AActor> RewardCoinClass;
+
 	UPROPERTY(VisibleDefaultsOnly, Category = "Player")
 	FName WeaponAttachSocketName;
 
@@ -83,12 +90,11 @@ protected:
 	UPROPERTY(Replicated, BlueprintReadOnly, Category = "Player")
 	bool bIsFiring;
 
-	UPROPERTY(EditAnywhere, Category = "Spawned Reward")
-	TSubclassOf<class ASPowerupActor> SpwanedObject;
 
 private:
 
-	void SpawnReward(FVector Location);
+	void SpawnReward();
+	
 	
 
 public:	
