@@ -49,9 +49,6 @@ protected:
 
 	UFUNCTION()
 	void OnRep_Health(float oldHealth);
-
-	TSubclassOf<class AActor> RewardCoin;
-
 public:	
 
 	float GetHealth() const;
