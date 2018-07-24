@@ -9,3 +9,11 @@ void ASPlayerState::AddScore(float ScoreDelta)
 {
 	Score += ScoreDelta;
 }
+
+void ASPlayerState::SubScore(float ScoreDelta)
+{
+	Score -= ScoreDelta;
+}
+
+
+

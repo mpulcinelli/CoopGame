@@ -15,9 +15,11 @@ class COOPGAME_API ASPlayerState : public APlayerState
 	GENERATED_BODY()
 	
 public:
-
+	
 	UFUNCTION(BlueprintCallable, Category="PlayerState")
 	void AddScore(float ScoreDelta);
 	
-	
+	UFUNCTION(BlueprintCallable, Category = "PlayerState")
+	void SubScore(float ScoreDelta);
+
 };
