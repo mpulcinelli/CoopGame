@@ -72,8 +72,10 @@ protected:
 	UPROPERTY(EditDefaultsOnly, Category = "Player")
 	TSubclassOf<ASWeapon> StarterWeaponClass;
 	
+	
 	UPROPERTY(EditDefaultsOnly, Category = "Player")
 	TSubclassOf<class AActor> RewardCoinClass;
+
 
 	UPROPERTY(VisibleDefaultsOnly, Category = "Player")
 	FName WeaponAttachSocketName;
