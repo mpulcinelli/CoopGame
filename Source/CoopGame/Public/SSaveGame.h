@@ -14,6 +14,12 @@ class COOPGAME_API USSaveGame : public USaveGame
 {
 	GENERATED_BODY()
 
-	
+public:
+
+	USSaveGame();
+
+		
+	UPROPERTY(EditAnywhere)
+		int32 PlayerScore;
 	
 };

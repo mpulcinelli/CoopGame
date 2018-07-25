@@ -10,7 +10,8 @@ ASPowerupActor::ASPowerupActor()
 	TotalNrOfTicks = 0;
 	bIsPowerupActive = false;
 	SetReplicates(true);
-
+	RewardValue = 1;
+	PlayerRewardPercentage = 0.8;
 }
 
 void ASPowerupActor::OnTickPowerup()

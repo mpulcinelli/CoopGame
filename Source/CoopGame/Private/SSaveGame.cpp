@@ -2,6 +2,7 @@
 
 #include "SSaveGame.h"
 
-
-
-
+USSaveGame::USSaveGame()
+{
+	PlayerScore = 0;
+}

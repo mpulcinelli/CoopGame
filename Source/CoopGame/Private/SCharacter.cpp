@@ -33,6 +33,8 @@ ASCharacter::ASCharacter()
 	ZoomInterpSpeed = 20.0f;
 
 	WeaponAttachSocketName = "WeaponSocket";
+
+	
 }
 
 // Called when the game starts or when spawned
@@ -141,6 +143,20 @@ void ASCharacter::SpawnReward()
 	AActor* RewardCoin = GetWorld()->SpawnActor(RewardCoinClass, &myLocalization, &MyRotation, SpawnInfo);
 }
 
+void ASCharacter::SaveGame()
+{
+
+	USSaveGame* SaveGameInstance = Cast<USSaveGame>(UGameplayStatics::CreateSaveGameObject(USSaveGame::StaticClass()));
+	SaveGameInstance->PlayerScore = this->PlayerState->Score;
+	UGameplayStatics::SaveGameToSlot(SaveGameInstance, TEXT("SaveSlot"),0);
+	//GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, TEXT("Teste Save!"));
+	
+}
+
+void ASCharacter::LoadGame()
+{
+	//GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, TEXT("Teste Load!"));
+}
 
 // Called every frame
 void ASCharacter::Tick(float DeltaTime)

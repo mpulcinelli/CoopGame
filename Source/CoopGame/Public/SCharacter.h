@@ -10,6 +10,7 @@
 #include "Components/CapsuleComponent.h"
 #include "CoopGame.h"
 #include "SWeapon.h"
+#include "SSavegame.h"
 #include "SHealthComponent.h"
 #include "Net/UnrealNetwork.h"
 #include "SCharacter.generated.h"
@@ -73,7 +74,7 @@ protected:
 	TSubclassOf<ASWeapon> StarterWeaponClass;
 	
 	
-	UPROPERTY(EditDefaultsOnly, Category = "Player")
+	UPROPERTY(EditDefaultsOnly, Category = "Reward")
 	TSubclassOf<class AActor> RewardCoinClass;
 
 
@@ -92,12 +93,15 @@ protected:
 	UPROPERTY(Replicated, BlueprintReadOnly, Category = "Player")
 	bool bIsFiring;
 
+	
+
 
 private:
 
 	void SpawnReward();
 	
 	
+
 
 public:	
 	// Called every frame
@@ -114,4 +118,8 @@ public:
 	UFUNCTION(BlueprintCallable, Category = "Player")
 		void StopFire();
 
+	UFUNCTION(BlueprintCallable, Category = "SaveGameType")
+	void SaveGame();
+	UFUNCTION(BlueprintCallable, Category = "SaveGameType")
+	void LoadGame();
 };

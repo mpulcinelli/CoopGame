@@ -54,4 +54,10 @@ public:
 
 	UFUNCTION(BlueprintImplementableEvent, Category = "Powerups")
 	void OnExpired();
+
+	UPROPERTY(Replicated, BlueprintReadOnly, Category = "Reward")
+		float RewardValue;
+
+	UPROPERTY(Replicated, BlueprintReadOnly, Category = "Reward")
+		float PlayerRewardPercentage;
 };
