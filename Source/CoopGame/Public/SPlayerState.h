@@ -16,10 +16,18 @@ class COOPGAME_API ASPlayerState : public APlayerState
 	
 public:
 	
-	UFUNCTION(BlueprintCallable, Category="PlayerState")
+	UFUNCTION(BlueprintCallable, Category="Player Score")
 	void AddScore(float ScoreDelta);
 	
-	UFUNCTION(BlueprintCallable, Category = "PlayerState")
+	UFUNCTION(BlueprintCallable, Category = "Player Score")
 	void SubScore(float ScoreDelta);
 
+	UFUNCTION(BlueprintCallable, Category = "Player Credits")
+	void AddCredits(int32 CreditsDelta);
+
+	UFUNCTION(BlueprintCallable, Category = "Player Credits")
+	 void SubCredits(int32 CreditsDelta);
+		
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Player Credits")
+	int32  PLayerCredits;
 };

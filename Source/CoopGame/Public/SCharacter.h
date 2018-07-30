@@ -120,6 +120,7 @@ public:
 
 	UFUNCTION(BlueprintCallable, Category = "SaveGameType")
 	void SaveGame();
+
 	UFUNCTION(BlueprintCallable, Category = "SaveGameType")
 	void LoadGame();
 };
