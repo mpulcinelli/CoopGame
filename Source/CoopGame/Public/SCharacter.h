@@ -100,6 +100,11 @@ private:
 
 	void SpawnReward();
 	
+	UFUNCTION(BlueprintCallable, Category = "SaveGameType")
+	void SaveGame();
+
+	UFUNCTION(BlueprintCallable, Category = "SaveGameType")
+	void LoadGame();
 	
 
 
@@ -118,9 +123,5 @@ public:
 	UFUNCTION(BlueprintCallable, Category = "Player")
 		void StopFire();
 
-	UFUNCTION(BlueprintCallable, Category = "SaveGameType")
-	void SaveGame();
 
-	UFUNCTION(BlueprintCallable, Category = "SaveGameType")
-	void LoadGame();
 };

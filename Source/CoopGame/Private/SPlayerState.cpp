@@ -16,12 +16,12 @@ void ASPlayerState::SubScore(float ScoreDelta)
 }
 
 
-void ASPlayerState::AddCredits(int32 CreditsDelta)
+void ASPlayerState::AddCredits(float CreditsDelta)
 {
 	PLayerCredits = PLayerCredits + CreditsDelta;
 }
 
-void ASPlayerState::SubCredits(int32 CreditsDelta)
+void ASPlayerState::SubCredits(float CreditsDelta)
 {
 	PLayerCredits = PLayerCredits - CreditsDelta;
 }

@@ -20,6 +20,8 @@ public:
 
 		
 	UPROPERTY(EditAnywhere)
-		int32 PlayerScore;
+	float PlayerScore;
 	
+	UPROPERTY(EditAnywhere)
+	float PLayerCredits;
 };

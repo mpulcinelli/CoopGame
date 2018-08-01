@@ -5,4 +5,6 @@
 USSaveGame::USSaveGame()
 {
 	PlayerScore = 0;
+
+	PLayerCredits = 0;
 }

@@ -23,11 +23,11 @@ public:
 	void SubScore(float ScoreDelta);
 
 	UFUNCTION(BlueprintCallable, Category = "Player Credits")
-	void AddCredits(int32 CreditsDelta);
+	void AddCredits(float CreditsDelta);
 
 	UFUNCTION(BlueprintCallable, Category = "Player Credits")
-	 void SubCredits(int32 CreditsDelta);
+	void SubCredits(float CreditsDelta);
 		
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Player Credits")
-	int32  PLayerCredits;
+	float  PLayerCredits;
 };

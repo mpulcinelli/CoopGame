@@ -3,6 +3,7 @@
 #include "SCharacter.h"
 #include "UObject/ConstructorHelpers.h"
 #include "SPowerupActor.h"
+#include "SSaveGame.h"
 #include "Engine/World.h"
 
 
@@ -56,8 +57,10 @@ void ASCharacter::BeginPlay()
 			CurrentWeapon->SetOwner(this);
 			CurrentWeapon->AttachToComponent(GetMesh(), FAttachmentTransformRules::SnapToTargetNotIncludingScale, WeaponAttachSocketName);
 		}
-
+		
 	}
+
+	
 }
 
 void ASCharacter::MoveForward(float Value)
@@ -130,12 +133,13 @@ void ASCharacter::OnHealthChanged(USHealthComponent* OwningHealthComp, float Hea
 		DetachFromControllerPendingDestroy();
 		SetLifeSpan(10.0f);
 		this->SpawnReward();
+		
 	}
 }
 
 void ASCharacter::SpawnReward()
 {
-	FVector myLocalization = GetActorLocation();
+	FVector myLocalization = GetActorLocation();	
 	FRotator MyRotation(0.0f, 0.0f, 0.0f);
 	FActorSpawnParameters SpawnInfo;
 	SpawnInfo.SpawnCollisionHandlingOverride = ESpawnActorCollisionHandlingMethod::AlwaysSpawn;
@@ -148,6 +152,7 @@ void ASCharacter::SaveGame()
 
 	USSaveGame* SaveGameInstance = Cast<USSaveGame>(UGameplayStatics::CreateSaveGameObject(USSaveGame::StaticClass()));
 	SaveGameInstance->PlayerScore = this->PlayerState->Score;
+	SaveGameInstance->PLayerCredits = 11;
 	UGameplayStatics::SaveGameToSlot(SaveGameInstance, TEXT("SaveSlot"),0);
 	//GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, TEXT("Teste Save!"));
 	
@@ -155,6 +160,10 @@ void ASCharacter::SaveGame()
 
 void ASCharacter::LoadGame()
 {
+	USSaveGame* SaveGameInstance = Cast<USSaveGame>(UGameplayStatics::CreateSaveGameObject(USSaveGame::StaticClass()));
+	SaveGameInstance = Cast<USSaveGame>(UGameplayStatics::LoadGameFromSlot("SaveSlot", 0));
+	this->PlayerState->Score = SaveGameInstance->PlayerScore;
+	
 	//GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, TEXT("Teste Load!"));
 }
 
@@ -190,6 +199,12 @@ void ASCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputComponen
 
 	PlayerInputComponent->BindAction("Fire", IE_Pressed, this, &ASCharacter::StartFire);
 	PlayerInputComponent->BindAction("Fire", IE_Released, this, &ASCharacter::StopFire);
+	
+	//Teste Save Game
+
+	PlayerInputComponent->BindAction("SaveJogo", IE_Pressed, this, &ASCharacter::SaveGame);
+	PlayerInputComponent->BindAction("LoadJogo", IE_Pressed, this, &ASCharacter::LoadGame);
+
 
 }
 
