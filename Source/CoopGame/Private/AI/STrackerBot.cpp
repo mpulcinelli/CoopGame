@@ -52,9 +52,7 @@ FVector ASTrackerBot::GetNextPathPoint()
 
 	FVector TrackerBotLocation = this->GetActorLocation();
 
-	UNavigationPath* NavPath = nullptr; //UNavigationSystemV1::FindPathToActorSynchronously(this, TrackerBotLocation, PlayerPawn, 0.00f, nullptr, 0);	
-	
-	TrackerBotLocation.AddBounded(TrackerBotLocation, 1.99f);
+	UNavigationPath* NavPath = UNavigationSystemV1::FindPathToActorSynchronously(this, TrackerBotLocation, PlayerPawn, 0.00f, nullptr, 0);		
 
 	if (NavPath && NavPath->PathPoints.Num()>1)
 	{
