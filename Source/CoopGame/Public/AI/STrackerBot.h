@@ -8,8 +8,14 @@
 #include "Kismet/GameplayStatics.h"
 #include "Components/StaticMeshComponent.h"
 #include "Components/SphereComponent.h"
-#include "AI/Navigation/NavigationSystem.h"
-#include "AI/Navigation/NavigationPath.h"
+#include "Runtime/Engine/Classes/Materials/MaterialInstanceDynamic.h"
+#include "Runtime/Core/Public/Math/Vector.h"
+
+//#include "AI/Navigation/NavigationSystem.h"
+//#include "AI/Navigation/NavigationPath.h"
+
+#include "NavigationSystem.h"
+#include "NavigationPath.h"
 #include "DrawDebugHelpers.h"
 #include "SHealthComponent.h"
 #include "SCharacter.h"
@@ -34,6 +40,19 @@ protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
+	UFUNCTION()
+	FVector GetNextPathPoint();
+
+	UFUNCTION()
+	void HandleTakeDamage(USHealthComponent* OwningHealthComp, float Health, float HealthDelta, const class UDamageType* DamageType, class AController* InstigatedBy, AActor* DamageCauser);
+
+	UFUNCTION()
+	void OnCheckNearbyBots();
+
+	void SelfDestruct();
+
+	void DamageSelf();
+
 	UPROPERTY(EditDefaultsOnly, Category="Components")
 	UStaticMeshComponent* MeshComp;
 
@@ -42,10 +61,7 @@ protected:
 
 	UPROPERTY(VisibleDefaultsOnly, Category = "Components")
 	USphereComponent* SphereComp;
-
-	UFUNCTION()
-	FVector GetNextPathPoint();
-
+	
 	FVector NextPathPoint;
 
 	UPROPERTY(EditDefaultsOnly, Category="TrackerBot")
@@ -56,14 +72,9 @@ protected:
 	
 	UPROPERTY(EditDefaultsOnly, Category = "TrackerBot")
 	float RequiredDistanceToTarget;
-
-	UFUNCTION()
-	void HandleTakeDamage(USHealthComponent* OwningHealthComp, float Health, float HealthDelta, const class UDamageType* DamageType, class AController* InstigatedBy, AActor* DamageCauser);
-
+		
 	UMaterialInstanceDynamic* MatInst;
-
-	void SelfDestruct();
-
+	
 	UPROPERTY(EditDefaultsOnly, Category = "TrackerBot")
 	UParticleSystem* ExplosionEffect;
 
@@ -81,17 +92,12 @@ protected:
 	float ExplosionDamage;
 
 	FTimerHandle TimerHandle_SelfDamage;
-
-	void DamageSelf();
-
+	
 	UPROPERTY(EditDefaultsOnly, Category = "TrackerBot")
 	USoundCue* SelfDestructSound;
 	
 	UPROPERTY(EditDefaultsOnly, Category = "TrackerBot")
 	USoundCue* ExplodeSound;
-
-	UFUNCTION()
-	void OnCheckNearbyBots();
 
 	UPROPERTY(EditDefaultsOnly, Category = "TrackerBot")
 	int PowerLevel;

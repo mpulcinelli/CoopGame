@@ -50,8 +50,12 @@ FVector ASTrackerBot::GetNextPathPoint()
 {
 	ACharacter* PlayerPawn = UGameplayStatics::GetPlayerCharacter(this, 0);
 
-	UNavigationPath* NavPath = UNavigationSystem::FindPathToActorSynchronously(this, GetActorLocation(), PlayerPawn);
+	FVector TrackerBotLocation = this->GetActorLocation();
+
+	UNavigationPath* NavPath = nullptr; //UNavigationSystemV1::FindPathToActorSynchronously(this, TrackerBotLocation, PlayerPawn, 0.00f, nullptr, 0);	
 	
+	TrackerBotLocation.AddBounded(TrackerBotLocation, 1.99f);
+
 	if (NavPath && NavPath->PathPoints.Num()>1)
 	{
 		return NavPath->PathPoints[1];
@@ -103,7 +107,7 @@ void ASTrackerBot::SelfDestruct()
 
 		DrawDebugSphere(GetWorld(), GetActorLocation(), ExplosionRadius, 12, FColor::Red, false, 2.0f, 0, 1.0f);
 
-		//Destroy();
+		Destroy();
 		SetLifeSpan(2.0f);
 	}
 
@@ -111,7 +115,7 @@ void ASTrackerBot::SelfDestruct()
 
 void ASTrackerBot::DamageSelf()
 {
-	UGameplayStatics::ApplyDamage(this, 20, GetInstigatorController(), this, nullptr);
+	/*UGameplayStatics::ApplyDamage(this, 20, GetInstigatorController(), this, nullptr);*/
 }
 
 void ASTrackerBot::OnCheckNearbyBots()
@@ -206,4 +210,3 @@ void ASTrackerBot::NotifyActorBeginOverlap(AActor* OtherActor)
 		}
 	}
 }
-
